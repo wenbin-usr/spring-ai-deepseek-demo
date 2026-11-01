@@ -71,12 +71,13 @@ public class ChatController {
         Map<String, Object> promptMap = Map.of("project", projectName);
         String prompt = promptTemplate.render(promptMap);
         return chatClient.prompt(prompt)
+                .advisors(new SimpleLoggerAdvisor())
                 .stream()
                 .content();
     }
 
     @GetMapping(value = "/chatTemplate2", produces = "text/html;charset=UTF-8")
-    public Flux<String> chatTemplate2(String name) {
+    public Flux<String> chatTemplate2(String projectName, String role) {
         String userText = """
            请帮我分析Spring Cloud GateWay的整体架构
            """;
@@ -84,11 +85,11 @@ public class ChatController {
         Message userMessage = new UserMessage(userText);
 
         String systemText = """
-          你是一个{name}
+          你是一个{role}
           """;
 
         SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(systemText);
-        Message systemMessage = systemPromptTemplate.createMessage(Map.of("name", name));
+        Message systemMessage = systemPromptTemplate.createMessage(Map.of("projectName", projectName, "role", role));
 
         Prompt prompt = new Prompt(List.of(userMessage, systemMessage));
         return chatClient.prompt(prompt)

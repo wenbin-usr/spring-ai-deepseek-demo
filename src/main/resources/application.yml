@@ -1,8 +1,13 @@
 spring:
   ai:
     deepseek:
-      api-key: sk-1aa7ebd108094d0aa25c97b7183fca98
+      api-key:
       base-url: https://api.deepseek.com
       chat:
         options:
           model: deepseek-flash
+
+
+logging:
+  level:
+    org.springframework.ai: debug # AI对话的日志级别
