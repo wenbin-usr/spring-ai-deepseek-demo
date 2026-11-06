@@ -4,6 +4,7 @@ import edu.whpu.service.BookService;
 import edu.whpu.service.BookTools;
 import lombok.AllArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,6 @@ public class ToolsController {
     @Autowired
     private BookTools bookTools;
 
-
     public ToolsController(ChatClient.Builder chatClientBuilder) {
         this.chatClient = chatClientBuilder
                 .build();
@@ -34,6 +34,7 @@ public class ToolsController {
         String prompt = promptTemplate.render(promptMap);
         return chatClient.prompt(prompt)
                 .tools(bookTools)
+                .advisors(new SimpleLoggerAdvisor())
                 .stream()
                 .content();
     }

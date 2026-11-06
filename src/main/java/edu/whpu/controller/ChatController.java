@@ -1,5 +1,6 @@
 package edu.whpu.controller;
 
+import edu.whpu.entity.Movie;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.messages.Message;
@@ -107,6 +108,16 @@ public class ChatController {
         return chatClient.prompt(promptTemplate.render())
                 .stream()
                 .content();
+    }
+
+    @GetMapping(value = "/chatTemplate4")
+    public Movie chatTemplate4() {
+        return chatClient.prompt()
+                .user("请推荐一部高分中文电影")
+                .advisors(new SimpleLoggerAdvisor())
+                .call()
+                .entity(Movie.class);
+
     }
 
 }
