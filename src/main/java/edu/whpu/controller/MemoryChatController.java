@@ -17,7 +17,7 @@ public class MemoryChatController {
     private final ChatClient chatClient;
 
     public MemoryChatController(ChatClient.Builder chatClientBuilder,
-                                JdbcChatMemoryRepository chatMemoryRepository) {
+                                JdbcChatMemoryRepository chatMemoryRepository) {  // 自动注入JdbcChatMemoryRepository
         ChatMemory chatMemory = MessageWindowChatMemory.builder()
                 .chatMemoryRepository(chatMemoryRepository)
                 .maxMessages(10)

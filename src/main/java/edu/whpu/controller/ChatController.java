@@ -49,15 +49,4 @@ public class ChatController {
                 .content();
     }
 
-
-    @GetMapping(value = "/chatTemplate4")
-    public Movie chatTemplate4() {
-        return chatClient.prompt()
-                .user("请推荐一部高分中文电影")
-                .advisors(new SimpleLoggerAdvisor())
-                .call()
-                .entity(Movie.class);
-
-    }
-
 }
