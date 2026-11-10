@@ -6,11 +6,17 @@ spring:
       chat:
         options:
           model: deepseek-flash
+    chat:
+      memory:
+        repository:
+          jdbc:
+            platform: mysql
+            initialize-schema: always
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: wenbin123456
-    url: jdbc:mysql://localhost:3306/db_test01?useSSL=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://118.145.97.186:3306/db_test?useSSL=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
 
 
 
