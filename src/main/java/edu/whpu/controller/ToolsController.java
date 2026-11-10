@@ -1,8 +1,6 @@
 package edu.whpu.controller;
 
-import edu.whpu.service.BookService;
 import edu.whpu.service.BookTools;
-import lombok.AllArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -26,7 +24,6 @@ public class ToolsController {
                 .build();
     }
 
-
     @GetMapping(value = "/toolChat", produces = "text/html;charset=UTF-8")
     public Flux<String> toolChat(String bookName) {
         PromptTemplate promptTemplate = new PromptTemplate("请帮我查询{bookName}的价格");
@@ -38,6 +35,5 @@ public class ToolsController {
                 .stream()
                 .content();
     }
-
 
 }
