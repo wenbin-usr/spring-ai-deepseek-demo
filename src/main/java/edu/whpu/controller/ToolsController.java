@@ -24,6 +24,9 @@ public class ToolsController {
                 .build();
     }
 
+    /**
+     * 流式
+     */
     @GetMapping(value = "/toolChat", produces = "text/html;charset=UTF-8")
     public Flux<String> toolChat(String bookName) {
         PromptTemplate promptTemplate = new PromptTemplate("请帮我查询{bookName}的价格");
@@ -33,6 +36,21 @@ public class ToolsController {
                 .tools(bookTools)
                 .advisors(new SimpleLoggerAdvisor())
                 .stream()
+                .content();
+    }
+
+    /**
+     * 非流式
+     */
+    @GetMapping("/toolChat1")
+    public String toolChat1(String bookName) {
+        PromptTemplate promptTemplate = new PromptTemplate("请帮我查询{bookName}的价格");
+        Map<String, Object> promptMap = Map.of("bookName", bookName);
+        String prompt = promptTemplate.render(promptMap);
+        return chatClient.prompt(prompt)  // 提示词
+                .tools(bookTools)
+                .advisors(new SimpleLoggerAdvisor())
+                .call()
                 .content();
     }
 
