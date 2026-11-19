@@ -11,24 +11,24 @@ import reactor.core.publisher.Flux;
 @RestController
 public class McpClientController {
 
-    @Autowired
-    private SyncMcpToolCallbackProvider toolCallbackProvider;
-
-    private final ChatClient chatClient;
-
-    public McpClientController(ChatClient.Builder chatClientBuilder) {
-        ToolCallback[] toolCallbacks = toolCallbackProvider.getToolCallbacks();
-        this.chatClient = chatClientBuilder
-                .defaultToolCallbacks(toolCallbacks)
-                .build();
-    }
-
-    @GetMapping(value = "/mcpInvoke")
-    public String chat(String message) {
-        return chatClient.prompt()
-                .user(message)
-                .call()
-                .content();
-    }
+//    @Autowired
+//    private SyncMcpToolCallbackProvider toolCallbackProvider;
+//
+//    private final ChatClient chatClient;
+//
+//    public McpClientController(ChatClient.Builder chatClientBuilder) {
+//        ToolCallback[] toolCallbacks = toolCallbackProvider.getToolCallbacks();
+//        this.chatClient = chatClientBuilder
+//                .defaultToolCallbacks(toolCallbacks)
+//                .build();
+//    }
+//
+//    @GetMapping(value = "/mcpInvoke")
+//    public String chat(String message) {
+//        return chatClient.prompt()
+//                .user(message)
+//                .call()
+//                .content();
+//    }
 
 }
