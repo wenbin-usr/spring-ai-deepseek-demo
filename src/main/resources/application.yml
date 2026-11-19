@@ -12,6 +12,13 @@ spring:
           jdbc:
             platform: mysql
             initialize-schema: always
+    mcp:
+      client:
+        streamable-http:
+          connections:
+            weather-streamable:   # mcp server名称，自定义
+              url: http://127.0.0.1:8766/
+              endpoint: kye.mcp.apm
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
